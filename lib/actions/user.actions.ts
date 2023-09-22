@@ -13,6 +13,8 @@ interface Params {
     image: string;
     path: string;  
 }
+
+
 export async function updateUser({
     userId,
     username,
@@ -43,3 +45,20 @@ export async function updateUser({
     }
 }
 
+export async function fetchUser(userId: string) {
+    try {
+        connectToDB();
+
+        return await User
+         .findOne({ id: userId })
+        //  .populate({
+        //     path: 'communties',
+        //     model: Community
+        //  })
+
+    } catch (error: any) {
+        throw new Error(`Failed to fetch user: ${error.message}`)
+
+    }
+    
+}
